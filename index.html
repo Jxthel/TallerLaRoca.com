@@ -17,7 +17,20 @@
     <a href="./Catalogo.html">Catálogo</a>
     <a href="./Sobre Nosotros.html">Sobre Nosotros</a>
     <a href="./Contact.html">Contáctanos</a>
+    <div class="menu-toggle" id="menuToggle">&#9776;</div>
   </nav>
+
+
+  <!--======Navbar hamburger menu toggle JS==============-->
+  <script>
+  const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.querySelector(".nav-links");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+</script>
+  
 
   <!-- Search -->
   <div class="search-container">
@@ -1085,10 +1098,31 @@ body {
 
 
 /* responsive adjustments */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
-  
-  .hero h1 {
-    font-size: 1.5rem;
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 }
 </style>
