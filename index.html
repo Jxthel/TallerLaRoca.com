@@ -308,9 +308,10 @@ carousel.addEventListener("touchend", (e) => {
 
 
 
-  <!-- Floating Cart Button -->
+<!-- Floating Cart Button -->
 <div class="cart-button" id="cartButton">
   <img src="./image/grocery-store.png" alt="Cart" />
+  <span class="cart-badge" id="cartBadge">0</span>
 </div>
 
 <!-- Cart Popup -->
@@ -360,52 +361,66 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderCart() {
-    cartItemsContainer.innerHTML = "";
+  cartItemsContainer.innerHTML = "";
 
-    cart = cart.map(item => {
-      if (item.priceNum == null) {
-        const source = item.priceText || item.price;
-        item.priceNum = parseCurrency(source);
-        item.priceText = item.priceText || formatCurrency(item.priceNum);
-      }
-      return item;
-    });
-
-    if (cart.length === 0) {
-      cartItemsContainer.innerHTML = "<p>No tienes artículos en tu carrito</p>";
-      if (cartTotalElement) cartTotalElement.textContent = "Total: " + formatCurrency(0);
-      saveCart();
-      return;
+  cart = cart.map(item => {
+    if (item.priceNum == null) {
+      const source = item.priceText || item.price;
+      item.priceNum = parseCurrency(source);
+      item.priceText = item.priceText || formatCurrency(item.priceNum);
     }
+    return item;
+  });
 
-    let total = 0;
+  // actualizar badge
+  const cartBadge = document.getElementById("cartBadge");
+if (cart.length > 0) {
+  cartBadge.textContent = cart.length;
+  cartBadge.style.display = "flex";
 
-    cart.forEach((item, index) => {
-      total += item.priceNum;
+  // 🔥 Animación al añadir item
+  cartBadge.classList.remove("animate"); // reset
+  void cartBadge.offsetWidth; // reflow hack para reiniciar animación
+  cartBadge.classList.add("animate");
+} else {
+  cartBadge.style.display = "none";
+}
 
-      const div = document.createElement("div");
-      div.classList.add("cart-item");
-      div.innerHTML = `
-        <img src="${item.img}" alt="${item.name}" class="cart-img">
-        <div class="cart-info">
-          <p><strong>${item.name}</strong></p>
-          <p>${formatCurrency(item.priceNum)}</p>
-        </div>
-        <button class="remove-item">Eliminar</button>
-      `;
-      cartItemsContainer.appendChild(div);
-
-      div.querySelector(".remove-item").addEventListener("click", () => {
-        cart.splice(index, 1);
-        saveCart();
-        renderCart();
-      });
-    });
-
-    if (cartTotalElement) {
-      cartTotalElement.textContent = "Total: " + formatCurrency(total);
-    }
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = "<p>No tienes artículos en tu carrito</p>";
+    if (cartTotalElement) cartTotalElement.textContent = "Total: " + formatCurrency(0);
+    saveCart();
+    return;
   }
+
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.priceNum;
+
+    const div = document.createElement("div");
+    div.classList.add("cart-item");
+    div.innerHTML = `
+      <img src="${item.img}" alt="${item.name}" class="cart-img">
+      <div class="cart-info">
+        <p><strong>${item.name}</strong></p>
+        <p>${formatCurrency(item.priceNum)}</p>
+      </div>
+      <button class="remove-item">Eliminar</button>
+    `;
+    cartItemsContainer.appendChild(div);
+
+    div.querySelector(".remove-item").addEventListener("click", () => {
+      cart.splice(index, 1);
+      saveCart();
+      renderCart();
+    });
+  });
+
+  if (cartTotalElement) {
+    cartTotalElement.textContent = "Total: " + formatCurrency(total);
+  }
+}
 
   // Add to cart
 addToCartButtons.forEach(button => {
@@ -420,7 +435,7 @@ addToCartButtons.forEach(button => {
     saveCart();
     renderCart();
 
-    // ✅ Show notification (with product name)
+    //Show notification (with product name)
     showNotification(name);
   });
 });
@@ -1017,6 +1032,34 @@ body {
   height: 28px;
 }
 
+
+/* Badge del carrito */
+.cart-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  display: none; /* se oculta si el carrito está vacío */
+}
+
+
+/* Animación de rebote */
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.cart-badge.animate {
+  animation: pop 0.3s ease;
+}
+
+
 /* Cart Popup */
 .cart-popup {
   position: fixed;
@@ -1085,6 +1128,7 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+
 
 
 
