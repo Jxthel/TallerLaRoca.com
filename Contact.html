@@ -7,6 +7,8 @@
 </head>
 <body>
 
+  <!-- Notification Popup -->
+<div id="cart-notification">Artículo agregado al carrito ✅</div>
 
 
     <!-- Navbar -->
@@ -209,24 +211,42 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Add to cart
-  addToCartButtons.forEach(button => {
-    button.addEventListener("click", e => {
-      const card = e.target.closest(".product-card");
-      const name = card.querySelector("h3").innerText.trim();
-      const priceText = card.querySelector(".price").innerText.trim();
-      const priceNum = parseCurrency(priceText);
-      const img = card.querySelector("img").src;
+addToCartButtons.forEach(button => {
+  button.addEventListener("click", e => {
+    const card = e.target.closest(".product-card");
+    const name = card.querySelector("h3").innerText.trim();
+    const priceText = card.querySelector(".price").innerText.trim();
+    const priceNum = parseCurrency(priceText);
+    const img = card.querySelector("img").src;
 
-      cart.push({ name, priceNum, priceText, img });
-      saveCart();
-      renderCart();
-    });
+    cart.push({ name, priceNum, priceText, img });
+    saveCart();
+    renderCart();
+
+    //Show notification (with product name)
+    showNotification(name);
   });
+});
+
+// Notification function
+function showNotification(productName) {
+  const notification = document.getElementById("cart-notification");
+  notification.textContent = `${productName} agregado al carrito ✅`;
+  notification.classList.add("show");
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+  }, 2500); // hide after 2.5s
+}
+
 
   // Initial render
   renderCart();
 });
 </script>
+
+
+
 
 <!--Cart button JS-->
 <script>
@@ -571,6 +591,36 @@ body {
   padding: 6px;
   border-bottom: 1px solid #ddd;
 }
+
+
+/* Cart Notification */
+#cart-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333333;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+  z-index: 2000;
+  max-width: 90%;      /*shrink on small screens*/
+  text-align: center;  /*center text*/
+  word-wrap: break-word; /*allow wrapping*/
+}
+
+/* Visible state */
+#cart-notification.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
 
 .remove-item {
   background: #4CAF50;
