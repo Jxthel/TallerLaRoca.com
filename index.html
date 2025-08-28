@@ -8,6 +8,11 @@
 <body>
 
 
+
+<!-- Notification Popup -->
+<div id="cart-notification">Artículo agregado al carrito</div>
+
+
   
   <!-- Navbar -->
 <header class="navbar">
@@ -87,6 +92,7 @@ menuToggle.addEventListener("click", () => {
   </section>
 
 
+<!--======Carousel JS + mobile adjustments==========-->
 <script>
 const carousel = document.querySelector(".carousel");
 const items = document.querySelectorAll(".carousel-item");
@@ -141,7 +147,35 @@ function resetAutoPlay() {
 }
 
 startAutoPlay();
+
+
+//Swipe support for mobile
+let startX = 0;
+let isDragging = false;
+
+carousel.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+  isDragging = true;
+  clearInterval(autoPlay); //pause autoplay while swiping
+});
+
+carousel.addEventListener("touchend", (e) => {
+  if (!isDragging) return;
+  isDragging = false;
+  let diff = e.changedTouches[0].clientX - startX;
+
+  if (diff > 50) {
+    prevSlide(); // swipe right
+  } else if (diff < -50) {
+    nextSlide(); // swipe left
+  } else {
+    showSlide(index); //not enough swipe → snap back
+  }
+
+  startAutoPlay(); //resume autoplay
+});
 </script>
+
 
 
 
@@ -374,19 +408,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Add to cart
-  addToCartButtons.forEach(button => {
-    button.addEventListener("click", e => {
-      const card = e.target.closest(".product-card");
-      const name = card.querySelector("h3").innerText.trim();
-      const priceText = card.querySelector(".price").innerText.trim();
-      const priceNum = parseCurrency(priceText);
-      const img = card.querySelector("img").src;
+addToCartButtons.forEach(button => {
+  button.addEventListener("click", e => {
+    const card = e.target.closest(".product-card");
+    const name = card.querySelector("h3").innerText.trim();
+    const priceText = card.querySelector(".price").innerText.trim();
+    const priceNum = parseCurrency(priceText);
+    const img = card.querySelector("img").src;
 
-      cart.push({ name, priceNum, priceText, img });
-      saveCart();
-      renderCart();
-    });
+    cart.push({ name, priceNum, priceText, img });
+    saveCart();
+    renderCart();
+
+    // ✅ Show notification (with product name)
+    showNotification(name);
   });
+});
+
+// Notification function
+function showNotification(productName) {
+  const notification = document.getElementById("cart-notification");
+  notification.textContent = `${productName} agregado al carrito ✅`;
+  notification.classList.add("show");
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+  }, 2500); // hide after 2.5s
+}
+
 
   // Initial render
   renderCart();
@@ -595,6 +644,7 @@ body {
   display: flex;
   transition: transform 0.5s ease-in-out;
   width: 100%;
+  Touch-action: pan-y;
 }
 
 .carousel-item {
@@ -943,7 +993,7 @@ body {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #4CAF50;
+  background: #4caf50;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -1007,6 +1057,35 @@ body {
   flex: 1;
   overflow-y: auto;
 }
+
+
+/* Cart Notification */
+#cart-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333333;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+  z-index: 2000;
+  max-width: 90%;      /*shrink on small screens*/
+  text-align: center;  /*center text*/
+  word-wrap: break-word; /*allow wrapping*/
+}
+
+/* Visible state */
+#cart-notification.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 
 .cart-item {
