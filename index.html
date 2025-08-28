@@ -12,12 +12,13 @@
   <!-- Navbar -->
 <header class="navbar">
 <div class="logo"><img src="./image/logo.png" alt="Logo" /></div>
+<div class="menu-toggle" id="menuToggle">&#9776;</div>
+
   <nav class="nav-links">
     <a href="#hero">Inicio</a>
     <a href="./Catalogo.html">Catálogo</a>
     <a href="./Sobre Nosotros.html">Sobre Nosotros</a>
     <a href="./Contact.html">Contáctanos</a>
-    <div class="menu-toggle" id="menuToggle">&#9776;</div>
   </nav>
 
 
@@ -1100,29 +1101,39 @@ body {
 /* responsive adjustments */
 .menu-toggle {
   display: none;
-  font-size: 26px;
+  font-size: 28px;
   cursor: pointer;
+  user-select: none;
+  padding: 6px 10px;
 }
 
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* show hamburger */
+  }
+
   .nav-links {
-    display: none;
+    display: none; 
     flex-direction: column;
+    gap: 0.8rem; /* tighter spacing */
     background: #fff;
     position: absolute;
-    top: 70px;
+    top: 70px; /* below navbar */
     right: 20px;
     padding: 1rem;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    z-index: 1002;
   }
 
   .nav-links.active {
-    display: flex;
+    display: flex; /* shown when toggled */
   }
 
-  .menu-toggle {
-    display: block;
+  .nav-links a {
+    font-size: 15px; /* shrink font size */
+    padding: 6px 10px;
   }
 }
 </style>
