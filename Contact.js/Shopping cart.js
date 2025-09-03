@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartItemsContainer = document.querySelector(".cart-items");
   const cartTotalElement = document.querySelector(".cart-total");
   const cotizarBtn = document.getElementById("cotizarBtn");
+  
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -46,74 +47,123 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderCart() {
-    cartItemsContainer.innerHTML = "";
+  cartItemsContainer.innerHTML = "";
 
-    if (cart.length === 0) {
-      cartItemsContainer.innerHTML = "<p>No tienes artículos en tu carrito</p>";
-      if (cartTotalElement) cartTotalElement.textContent = "Total: " + formatCurrency(0);
-      updateBadge();
-      saveCart();
-      return;
-    }
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = "<p>No tienes artículos en tu carrito</p>";
+    if (cartTotalElement) cartTotalElement.textContent = "Total: " + formatCurrency(0);
+    updateBadge();
+    saveCart();
+    return;
+  }
 
-    let total = 0;
+  let total = 0;
 
-    cart.forEach((item, index) => {
-      const subtotal = item.priceNum * item.quantity;
-      total += subtotal;
+  cart.forEach((item, index) => {
+    const subtotal = item.priceNum * item.quantity;
+    total += subtotal;
 
-      const div = document.createElement("div");
-      div.classList.add("cart-item");
-      div.innerHTML = `
-        <img src="${item.img}" alt="${item.name}" class="cart-img">
-        <div class="cart-info">
-          <p><strong>${item.name}</strong></p>
-          ${item.code ? `<p class="cart-code">Codigo: ${item.code}</p>` : ""}
-          <p>Precio: ${formatCurrency(item.priceNum)}</p>
-          <div class="qty-controls">
-            <button class="decrease">-</button>
-            <span class="qty">${item.quantity}</span>
-            <button class="increase">+</button>
-          </div>
-          <p>Subtotal: ${formatCurrency(subtotal)}</p>
+    const div = document.createElement("div");
+    div.classList.add("cart-item");
+    div.innerHTML = `
+      <img src="${item.img}" alt="${item.name}" class="cart-img">
+      <div class="cart-info">
+        <p><strong>${item.name}</strong></p>
+        ${item.code ? `<p class="cart-code">Codigo: ${item.code}</p>` : ""}
+        <p>Precio: ${formatCurrency(item.priceNum)}</p>
+        <div class="qty-controls">
+          <button class="decrease">-</button>
+          <span class="qty">${item.quantity}</span>
+          <button class="increase">+</button>
         </div>
-        <button class="remove-item" title="Eliminar">
-          <img src="./image/can.png" alt="Eliminar" class="trash-icon"/>
-            <span class="remove-label">Eliminar todo</span>
-        </button>
-      `;
+        <p>Subtotal: ${formatCurrency(subtotal)}</p>
+      </div>
+      <button class="remove-item" title="Eliminar">
+        <img src="./image/can.png" alt="Eliminar" class="trash-icon"/>
+        <span class="remove-label">Eliminar todo</span>
+      </button>
+    `;
 
-      cartItemsContainer.appendChild(div);
+    cartItemsContainer.appendChild(div);
 
-      // Quantity controls
-      div.querySelector(".increase").addEventListener("click", () => {
-        item.quantity++;
-        saveCart();
-        renderCart();
-      });
+    // Quantity controls
+const decreaseBtn = div.querySelector(".decrease");
+const increaseBtn = div.querySelector(".increase");
+const qtySpan = div.querySelector(".qty");
 
-      div.querySelector(".decrease").addEventListener("click", () => {
-        if (item.quantity > 1) {
-          item.quantity--;
-        } else {
-          cart.splice(index, 1);
-        }
-        saveCart();
-        renderCart();
-      });
+function updateDecreaseState() {
+  if (item.quantity <= 1) {
+    decreaseBtn.disabled = true;
+    decreaseBtn.classList.add("disabled");
+  } else {
+    decreaseBtn.disabled = false;
+    decreaseBtn.classList.remove("disabled");
+  }
+}
 
-      // Remove button
-      div.querySelector(".remove-item").addEventListener("click", () => {
+increaseBtn.addEventListener("click", () => {
+  item.quantity++;
+  saveCart();
+  renderCart();
+});
+
+decreaseBtn.addEventListener("click", () => {
+  if (decreaseBtn.disabled) return; // extra guard
+  if (item.quantity > 1) {
+    item.quantity--;
+    saveCart();
+    renderCart();
+  }
+});
+
+// Initialize button state
+updateDecreaseState();
+
+    // Remove button (shake icon first, then delete)
+    const removeBtn = div.querySelector(".remove-item");
+    const trashIcon = div.querySelector(".trash-icon");
+
+    removeBtn.addEventListener("click", () => {
+      if (!trashIcon) {
         cart.splice(index, 1);
         saveCart();
         renderCart();
-      });
+        return;
+      }
+
+      if (trashIcon.dataset.deleting === "1") return;
+      trashIcon.dataset.deleting = "1";
+
+      // Restart animation
+      trashIcon.classList.remove("shake");
+      void trashIcon.offsetWidth;
+      trashIcon.classList.add("shake");
+
+      let finished = false;
+
+      const finish = () => {
+        if (finished) return; // only run once
+        finished = true;
+        cart.splice(index, 1);
+        saveCart();
+        renderCart();
+      };
+
+      // Run once on animation end
+      trashIcon.addEventListener("animationend", finish, { once: true });
+
+      // Safety fallback (only runs if animationend fails)
+      setTimeout(() => {
+        finish();
+      }, 800);
+
     });
+  });
 
-    if (cartTotalElement) cartTotalElement.textContent = "Total: " + formatCurrency(total);
+  if (cartTotalElement) cartTotalElement.textContent = "Total: " + formatCurrency(total);
 
-    updateBadge();
-  }
+  updateBadge();
+}
 
   // Add to cart
   addToCartButtons.forEach((button) => {
