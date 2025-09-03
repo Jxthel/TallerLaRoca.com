@@ -4,34 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Inicio-Taller y Repuestos La Roca</title>
+   <link rel="stylesheet" href="./css/Contact.css">
+
+  <!--======Navbar hamburger menu toggle JS==============-->
+  <script src="./Contact.js/mobile DPM.js"></script>
+
+
 </head>
 <body>
 
-  <!-- Notification Popup -->
-<div id="cart-notification">Artículo agregado al carrito ✅</div>
 
 
     <!-- Navbar -->
 <header class="navbar">
 <div class="logo"><img src="./image/logo.png" alt="Logo" /></div>
 <div class="menu-toggle" id="menuToggle">&#9776;</div>
-  
+
   <nav class="nav-links">
     <a href="./index.html">Inicio</a>
     <a href="./Catalogo.html">Catálogo</a>
     <a href="./Sobre Nosotros.html">Sobre Nosotros</a>
-    <a href="#contact-section">Contáctanos</a>
+    <a href="#Form">Contáctanos</a>
   </nav>
 
-  <!--======Navbar hamburger menu toggle JS==============-->
-  <script>
-  const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.querySelector(".nav-links");
 
-menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("active");
-});
-</script>
+
+
+
 
   <!-- Search -->
   <div class="search-container">
@@ -41,12 +40,11 @@ menuToggle.addEventListener("click", () => {
   <input type="text" class="search-input" placeholder="Buscar..." />
 </div>
 </header>
- 
 
 
-
-
-<div class="contact-section">
+  <!--=========CONTACT SECTION===============-->
+  <main class="content">
+  <div class="contact-section">
   <!-- Form -->
   <div class="contact-left">
     <h2>Ponte en contacto con nosotros</h2>
@@ -77,6 +75,7 @@ menuToggle.addEventListener("click", () => {
     </form>
   </div>
 
+
   <!-- Map & Info -->
   <div class="contact-right">
 
@@ -97,6 +96,8 @@ San Pedro Sula, Cortés, Honduras,
       </div>
     </div>
 
+
+
     <!-- Google Maps iframe -->
     <iframe 
       src="https://www.google.com/maps?q=15.5213025,-88.0239675&hl=es;z=14&output=embed" 
@@ -108,6 +109,11 @@ San Pedro Sula, Cortés, Honduras,
     </iframe>
   </div>
 </div>
+</main>
+
+
+
+
 
 
 
@@ -128,707 +134,25 @@ San Pedro Sula, Cortés, Honduras,
   </div>
   <div class="cart-footer">
     <p class="cart-total">Total: L0.00</p>
-    <button class="checkout-btn">Finalizar Compra</button>
-  </div>
+
+
+     <!-- Cotizar button with WhatsApp link -->
+  <button id="cotizarBtn" class="cotizar-btn">
+  <svg xmlns="http://www.w3.org/2000/svg" class="wa-icon" viewBox="0 0 32 32">
+      <path fill="white" d="M16.001 3.2c-7.057 0-12.8 5.743-12.8 12.8 0 2.257.6 4.457 1.743 6.4L3.2 28.8l6.686-1.743a12.646 12.646 0 0 0 6.114 1.543h.001c7.056 0 12.799-5.743 12.799-12.8 0-3.413-1.329-6.622-3.743-9.057a12.73 12.73 0 0 0-9.056-3.543zm0 23.429c-1.971 0-3.914-.514-5.6-1.486l-.4-.229-3.971 1.029 1.057-3.886-.257-.4A10.8 10.8 0 0 1 5.2 16c0-5.943 4.857-10.8 10.8-10.8 2.886 0 5.6 1.143 7.657 3.2A10.776 10.776 0 0 1 26.8 16c0 5.943-4.857 10.8-10.799 10.8zm6.171-8.086c-.343-.171-2.029-1-2.343-1.114-.314-.114-.543-.171-.771.171s-.886 1.114-1.086 1.343c-.2.229-.4.257-.743.086-.343-.171-1.457-.537-2.771-1.714-1.029-.914-1.714-2.057-1.914-2.4-.2-.343-.021-.529.15-.7.157-.156.343-.4.514-.6.171-.2.229-.343.343-.571.114-.229.057-.429-.029-.6-.086-.171-.771-1.857-1.057-2.543-.286-.686-.571-.586-.771-.6-.2-.014-.429-.014-.657-.014s-.6.086-.914.429c-.314.343-1.2 1.171-1.2 2.857s1.229 3.314 1.4 3.543c.171.229 2.414 3.686 5.857 5.171.82.354 1.457.566 1.957.726.823.262 1.571.229 2.157.139.657-.1 2.029-.829 2.314-1.629.286-.8.286-1.486.2-1.629-.085-.143-.314-.229-.657-.4z"/>
+    </svg>
+  Realizar cotización
+</button>
+</div>
 </div>
 
-
-<!-- Cart item adding, total cost, name, price, product image and item removing JS -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const addToCartButtons = document.querySelectorAll(".add-to-cart");
-  const cartItemsContainer = document.querySelector(".cart-items");
-  const cartTotalElement = document.querySelector(".cart-total");
-
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-
-  function parseCurrency(text) {
-    if (typeof text === "number") return text;
-    if (!text) return 0;
-    const cleaned = text.toString().replace(/[^0-9.,-]/g, ""); 
-    const normalized = cleaned.replace(/,/g, "");
-    const num = parseFloat(normalized);
-    return isNaN(num) ? 0 : num;
-  }
-
-  function formatCurrency(num) {
-    return "L" + Number(num).toLocaleString("es-HN", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-  }
-
-  function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-
-  function renderCart() {
-  cartItemsContainer.innerHTML = "";
-
-  cart = cart.map(item => {
-    if (item.priceNum == null) {
-      const source = item.priceText || item.price;
-      item.priceNum = parseCurrency(source);
-      item.priceText = item.priceText || formatCurrency(item.priceNum);
-    }
-    return item;
-  });
-
-  // actualizar badge
-  const cartBadge = document.getElementById("cartBadge");
-if (cart.length > 0) {
-  cartBadge.textContent = cart.length;
-  cartBadge.style.display = "flex";
-
-  // 🔥 Animación al añadir item
-  cartBadge.classList.remove("animate"); // reset
-  void cartBadge.offsetWidth; // reflow hack para reiniciar animación
-  cartBadge.classList.add("animate");
-} else {
-  cartBadge.style.display = "none";
-}
-
-  if (cart.length === 0) {
-    cartItemsContainer.innerHTML = "<p>No tienes artículos en tu carrito</p>";
-    if (cartTotalElement) cartTotalElement.textContent = "Total: " + formatCurrency(0);
-    saveCart();
-    return;
-  }
-
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    total += item.priceNum;
-
-    const div = document.createElement("div");
-    div.classList.add("cart-item");
-    div.innerHTML = `
-      <img src="${item.img}" alt="${item.name}" class="cart-img">
-      <div class="cart-info">
-        <p><strong>${item.name}</strong></p>
-        <p>${formatCurrency(item.priceNum)}</p>
-      </div>
-      <button class="remove-item">Eliminar</button>
-    `;
-    cartItemsContainer.appendChild(div);
-
-    div.querySelector(".remove-item").addEventListener("click", () => {
-      cart.splice(index, 1);
-      saveCart();
-      renderCart();
-    });
-  });
-
-  if (cartTotalElement) {
-    cartTotalElement.textContent = "Total: " + formatCurrency(total);
-  }
-}
-
-  // Add to cart
-addToCartButtons.forEach(button => {
-  button.addEventListener("click", e => {
-    const card = e.target.closest(".product-card");
-    const name = card.querySelector("h3").innerText.trim();
-    const priceText = card.querySelector(".price").innerText.trim();
-    const priceNum = parseCurrency(priceText);
-    const img = card.querySelector("img").src;
-
-    cart.push({ name, priceNum, priceText, img });
-    saveCart();
-    renderCart();
-
-    //Show notification (with product name)
-    showNotification(name);
-  });
-});
-
-// Notification function
-function showNotification(productName) {
-  const notification = document.getElementById("cart-notification");
-  notification.textContent = `${productName} agregado al carrito ✅`;
-  notification.classList.add("show");
-
-  setTimeout(() => {
-    notification.classList.remove("show");
-  }, 2500); // hide after 2.5s
-}
-
-
-  // Initial render
-  renderCart();
-});
-</script>
-
-
-
-
-<!--Cart button JS-->
-<script>
-// Get elements
-const cartButton = document.getElementById("cartButton");
-const cartPopup = document.getElementById("cartPopup");
-const closeCart = document.getElementById("closeCart");
-
-// Toggle popup
-cartButton.addEventListener("click", () => {
-  cartPopup.style.display =
-    cartPopup.style.display === "flex" ? "none" : "flex";
-});
-
-// Close button
-closeCart.addEventListener("click", () => {
-  cartPopup.style.display = "none";
-});
-</script>
-
-
-
-<!-- Botón flotante de WhatsApp -->
-<a href="https://wa.me/50497257161" target="_blank" class="whatsapp-button">
-  <img src="./image/whatsapp.png" alt="WhatsApp" />
-</a>
-
-
-
 <!-- footer -->
-  <footer class="footer">
-    <p>&copy; 2025 Taller y Repuestos la Roca. Todos los derechos reservados.</p>
-  </footer>
+<footer class="footer">
+  <p>&copy; 2025 Taller y Repuestos la Roca. Todos los derechos reservados.</p>
+</footer>
 
+  <!--=============SHOPPING CART JS==============-->
+  <script src="./Contact.js/Shopping cart.js"></script>
 
-<!-- CSS Style -->
-<style>
-/* Reset Base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8fafc;
-  color: #111827;
-  line-height: 1.6;
-}
-
-
-
-
-/* Navigation bar */
-.navbar {
-  background-color: #ffffff;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between; /* space between left, center, right */
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.logo {
-  flex: 1; /* left area */
-}
-
-.logo img {
-  width: 100px;
-  height: auto;
-}
-
-.nav-links {
-  flex: 2; /* center area */
-  display: flex;
-  justify-content: center; /* center links horizontally */
-  gap: 2rem;
-}
-
-.nav-links a {
-  font-size: 17px;
-  text-decoration: none;
-  color: #333333;
-  font-weight: 500;
-  padding-bottom: 4px;
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2.3px;
-  width: 0%;
-  background-color: #4CAF50;
-  transition: width 0.2s ease-in-out;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
-
-
-/*Form*/
-.contact-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 40px;
-  }
-
-  .contact-left, .contact-right {
-    flex: 1;
-    min-width: 350px;
-  }
-
-
-
-
-  /* Form Styles */
-  .contact-left h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
-  }
-
-  .contact-left p {
-    margin-bottom: 25px;
-    color: #333333;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .contact-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-
-  .contact-form button {
-    width: 100%;
-    padding: 15px;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .contact-form button:hover {
-    background: #1e7e34;
-  }
-
-
-
-  /* Contact info above map */
-  .info-cards {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  
-
-  .info-card {
-    flex: 1;
-    min-width: 150px;
-    background: #333333;
-    padding: 15px;
-    text-align: center;
-    color: white;
-    font-size: 16px;
-  }
-
-
-
-
-
-  /* Map */
-  #map {
-    width: 100%;
-    height: 500px;
-    border-radius: 5px;
-  }
-
-
-
-
-
-
-/* responsive adjustments */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .hero h1 {
-    font-size: 1.5rem;
-  }
-
-}
-
-/* Container */
-.search-container {
-  flex: 1; /* right area */
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  position: relative;
-}
-
-/* Search button */
-.search-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-}
-
-.search-btn img {
-  width: 22px;
-  height: 22px;
-}
-
-/* Search input (hidden by default) */
-.search-input {
-  width: 0;
-  opacity: 0;
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  outline: none;
-  margin-left: 0;  /* initially collapsed */
-  transition: all 0.3s ease-in-out;
-}
-
-/* Expand input to the RIGHT of icon */
-.search-container:hover .search-input,
-.search-input:focus {
-  width: 160px;
-  opacity: 1;
-  margin-left: 8px; /* gap between icon and input */
-}
-
-
-
-/* Floating Cart Button */
-.cart-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #4CAF50;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  z-index: 1001;
-  transition: transform 0.3s, background 0.3s;
-}
-
-.cart-button:hover {
-  background: #45a049;
-  transform: scale(1.05);
-}
-
-.cart-button img {
-  margin-left: -2px;
-  width: 28px;   /* adjust size of the icon */
-  height: 28px;
-}
-
-
-/* Badge del carrito */
-.cart-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: red;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 50%;
-  display: none; /* se oculta si el carrito está vacío */
-}
-
-
-/* Animación de rebote */
-@keyframes pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.4); }
-  100% { transform: scale(1); }
-}
-
-.cart-badge.animate {
-  animation: pop 0.3s ease;
-}
-
-
-
-/* Cart Popup */
-.cart-popup {
-  position: fixed;
-  bottom: 90px; /* above the button */
-  right: 20px;
-  width: 300px;
-  max-height: 400px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  display: none;
-  flex-direction: column;
-  z-index: 1002;
-  overflow: hidden;
-}
-
-/* Header */
-.cart-header {
-  background: #f5f5f5;
-  padding: 10px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.close-cart {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* Items */
-.cart-items {
-  padding: 15px;
-  flex: 1;
-  overflow-y: auto;
-}
-
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  padding: 6px;
-  border-bottom: 1px solid #ddd;
-}
-
-
-/* Cart Notification */
-#cart-notification {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333333;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 6px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease-in-out;
-  z-index: 2000;
-  max-width: 90%;      /*shrink on small screens*/
-  text-align: center;  /*center text*/
-  word-wrap: break-word; /*allow wrapping*/
-}
-
-/* Visible state */
-#cart-notification.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
-
-.remove-item {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.remove-item:hover {
-  background: #45a049;
-}
-
-/* Footer */
-.cart-footer {
-  padding: 10px;
-  border-top: 1px solid #ddd;
-  text-align: center;
-}
-
-.checkout-btn {
-  background: #4CAF50;
-  color: white;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.checkout-btn:hover {
-  background: #45a049;
-}
-
-
-.cart-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  padding: 6px;
-  border-bottom: 1px solid #ddd;
-}
-
-.cart-img {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  border-radius: 4px;
-}
-
-.cart-info {
-  flex: 1;
-}
-
-.add-to-cart {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.add-to-cart:hover {
-  background: #45a049;
-}
-
-.cart-footer {
-  padding: 10px;
-  border-top: 1px solid #ddd;
-  text-align: center;
-}
-
-.cart-total { 
-  font-weight: 700; 
-  margin-bottom: 10px; 
-}
-
-
-/*Whatsapp linked button*/
-.whatsapp-button {
-  position: fixed;
-  bottom: 100px;  /* queda arriba del carrito */
-  right: 20px;
-  background: #4CAF50;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  z-index: 1001;
-  transition: transform 0.3s, background 0.3s;
-}
-
-.whatsapp-button:hover {
-  background: #45a049;
-  transform: scale(1.05);
-}
-
-.whatsapp-button img {
-  margin-left: 2px;
-  width: 32px; /* icon-size */
-  height: 32px;
-}
-
-
-
-/* footer */
-.footer {
-  background-color: #333333;
-  color: white;
-  padding: 1.1rem;
-  margin-top: 5.6em;
-  text-align: center;
-}
-  
-
-  /* responsive adjustments */
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  user-select: none;
-  padding: 6px 10px;
-}
-
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block; /* show hamburger */
-  }
-
-  .nav-links {
-    display: none; 
-    flex-direction: column;
-    gap: 0.8rem; /* tighter spacing */
-    background: #fff;
-    position: absolute;
-    top: 70px; /* below navbar */
-    right: 20px;
-    padding: 1rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    z-index: 1002;
-  }
-
-  .nav-links.active {
-    display: flex; /* shown when toggled */
-  }
-
-  .nav-links a {
-    font-size: 15px; /* shrink font size */
-    padding: 6px 10px;
-  }
-}
-
-</style>
 </body>
 </html>
