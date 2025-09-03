@@ -627,8 +627,8 @@ background: white;
   pointer-events: none;
 }
 
-@keyframes shake {
-  0% { transform: rotate(0deg); }
+@keyframes icon-shake {
+0% { transform: rotate(0deg); }
   20% { transform: rotate(-15deg); }
   40% { transform: rotate(15deg); }
   60% { transform: rotate(-10deg); }
@@ -636,8 +636,8 @@ background: white;
   100% { transform: rotate(0deg); }
 }
 
-.remove-item.shake .trash-icon {
-  animation: shake 0.5s;
+.trash-icon.shake {
+  animation: icon-shake 0.5s ease;
 }
 
 
@@ -799,3 +799,4 @@ background: white;
     padding: 6px 10px;
   }
 }
+
