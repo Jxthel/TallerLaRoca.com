@@ -1,4 +1,4 @@
-/* Reset Base */
+/* Resetear base*/
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +25,7 @@ body {
 
 
 
-/* Navigation bar */
+/* Navbar */
 .navbar {
   background-color: #ffffff;
   padding: 1rem 2rem;
@@ -81,7 +81,7 @@ body {
 
 
 
-/* Search Container */
+/* contenedor de busqueda */
 .search-container {
   flex: 1; /* right area */
   display: flex;
@@ -90,7 +90,7 @@ body {
   position: relative;
 }
 
-/* Search button */
+/* boton de busqueda*/
 .search-btn {
   background: none;
   border: none;
@@ -103,7 +103,7 @@ body {
   height: 22px;
 }
 
-/* Search input (hidden by default) */
+/* Barra de busqueda de la lupa que se esconde al inicio (hidden by default)*/
 .search-input {
   width: 0;
   opacity: 0;
@@ -112,23 +112,23 @@ body {
   border-radius: 20px;
   font-size: 0.9rem;
   outline: none;
-  margin-left: 0;  /* initially collapsed */
+  margin-left: 0;  /* inicialmente no es visible */
   transition: all 0.3s ease-in-out;
 }
 
-/* Expand input to the RIGHT of icon */
+/* Barra de busqueda de la lupa que se expande a la derecha */
 .search-container:hover .search-input,
 .search-input:focus {
   width: 160px;
   opacity: 1;
-  margin-left: 8px; /* gap between icon and input */
+  margin-left: 8px; /* espacio entre el icono y la barra de busqueda  */
 }
 
 .content {
-  flex: 1; /* pushes footer down */
+  flex: 1; /* pie de pagina absoluto al final de la pagina */
 }
 
-/*Form*/
+/*Formulario*/
 .contact-section {
     display: flex;
     flex-wrap: wrap;
@@ -144,7 +144,7 @@ body {
 
 
 
-  /* Form Styles */
+  /* estilo del formulario*/
   .contact-left h2 {
     font-size: 28px;
     margin-bottom: 10px;
@@ -194,7 +194,7 @@ body {
 
 
 
-  /* Contact info above map */
+  /* informacion de contacto encima del mapa */
   .info-cards {
     display: flex;
     flex-wrap: wrap;
@@ -216,7 +216,7 @@ body {
 
 
 
-  /* Map */
+  /* Mapa */
   #map {
     width: 100%;
     height: 500px;
@@ -230,7 +230,7 @@ body {
 
 
 
-/* responsive adjustments */
+/* ajustes responsivos */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -242,7 +242,7 @@ body {
 
 }
 
-/* Floating Cart Button */
+/* boton del carrito */
 .cart-button {
   position: fixed;
   bottom: 20px;
@@ -269,14 +269,14 @@ body {
 
 .cart-button img {
   margin-left: -2px;
-  width: 28px;   /* adjust size of the icon */
+  width: 28px;   /* ajustar tamaño del icono */
   height: 28px;
 }
 
 
 
 
-/* Cart Badge */
+/* insignia del carrito */
 .cart-badge {
   position: absolute;
   top: 8px;
@@ -287,7 +287,7 @@ body {
   font-weight: bold;
   padding: 2px 6px;
   border-radius: 50%;
-  display: none; /* hides if cart is empty */
+  display: none; /* esconder si el carrito esta vacio */
 }
 
 
@@ -303,10 +303,10 @@ body {
 }
 
 
-/* Cart Popup */
+/* pantalla emergente del carrito*/
 .cart-popup {
   position: fixed;
-  bottom: 90px; /* above the button */
+  bottom: 90px; /* arriba del boton */
   right: 90px;
   width: 400px;
   max-height: 400px;
@@ -328,7 +328,7 @@ body {
 
 
 
-/*Cotizar button*/
+/*boton de cotizar*/
 .cotizar-btn {
   background-color: #4CAF50;
   color: white;
@@ -354,7 +354,7 @@ body {
 
 
 
-/* Cart Header */
+/* cabezal del carrito*/
 .cart-header {
   background: #f5f5f5;
   padding: 10px;
@@ -373,7 +373,7 @@ body {
 
 
 
-/* Cart Items */
+/* productos del carrito*/
 .cart-items {
   padding: 15px;
   flex: 1;
@@ -439,14 +439,6 @@ body {
   transform: scale(1.09);
 }
 
-.remove-item .remove-label {
-  font-size: 0.75rem;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 3px;
-  line-height: 1.2;
-  pointer-events: none;
-}
 
 @keyframes icon-shake {
 0% { transform: rotate(0deg); }
@@ -465,7 +457,7 @@ body {
 
 
 
-/* Cart Footer */
+/* parte inferior del carrito */
 .cart-footer {
   padding: 10px;
   border-top: 1px solid #ddd;
@@ -473,7 +465,7 @@ body {
 }
 
 
-/* Cart Notification */
+/* notificacion de adicion del producto en carrito */
 #cart-notification {
   position: fixed;
   top: 20px;
@@ -489,18 +481,18 @@ body {
   pointer-events: none;
   transition: opacity 0.4s ease-in-out;
   z-index: 2000;
-  max-width: 90%;      /*shrink on small screens*/
-  text-align: center;  /*center text*/
-  word-wrap: break-word; /*allow wrapping*/
+  max-width: 90%;      /*minimizar para pantallas mobiles*/
+  text-align: center;  /*centrar el texto*/
+  word-wrap: break-word; /*ajuste de texto*/
 }
 
-/* Visible state */
+/* estado visble, que sea visible la notificacion */
 #cart-notification.show {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Quantity Controls */
+/* controles de cantidad de producto */
 .qty-controls {
   display: flex;
   align-items: center;
@@ -550,7 +542,7 @@ body {
 
 
 
-/* footer */
+/* pie de pagina */
 .footer {
   position: relative;
   background-color: #333333;
@@ -562,7 +554,7 @@ body {
 
 
 
-/* responsive adjustments */
+/* ajustes responsivos */
 .menu-toggle {
   display: none;
   font-size: 28px;
@@ -573,16 +565,16 @@ body {
 
 @media (max-width: 768px) {
   .menu-toggle {
-    display: block; /* show hamburger */
+    display: block; /* mostrar menu hamburguesa */
   }
 
   .nav-links {
     display: none; 
     flex-direction: column;
-    gap: 0.8rem; /* tighter spacing */
+    gap: 0.8rem; /* espciado compacto */
     background: #fff;
     position: absolute;
-    top: 70px; /* below navbar */
+    top: 70px; /* abajo del navbar */
     right: 20px;
     padding: 1rem;
     border: 1px solid #e5e7eb;
@@ -592,12 +584,11 @@ body {
   }
 
   .nav-links.active {
-    display: flex; /* shown when toggled */
+    display: flex; /* visible cuando se activa */
   }
 
   .nav-links a {
-    font-size: 15px; /* shrink font size */
+    font-size: 15px; /* hacer ms pequeño el tamaño de la tipografia*/
     padding: 6px 10px;
   }
 }
-
