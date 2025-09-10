@@ -1,4 +1,4 @@
-/* Reset Base */
+/* Resetear base  */
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +15,7 @@ body {
 
 
 
-/* Navigation bar */
+/* navbar*/
 .navbar {
   background-color: #ffffff;
   padding: 1rem 2rem;
@@ -71,16 +71,16 @@ body {
 
 
 
-/* Search Container */
+/* Contenedor de busqueda */
 .search-container {
-  flex: 1; /* right area */
+  flex: 1; /* area derecha */
   display: flex;
   justify-content: flex-end;
   align-items: center;
   position: relative;
 }
 
-/* Search button */
+/* boton de busqueda*/
 .search-btn {
   background: none;
   border: none;
@@ -93,7 +93,7 @@ body {
   height: 22px;
 }
 
-/* Search input (hidden by default) */
+/* Barra de busqueda de la lupa que se esconde al inicio (hidden by default) */
 .search-input {
   width: 0;
   opacity: 0;
@@ -106,21 +106,21 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-/* Expand input to the RIGHT of icon */
+/* Barra de busqueda de la lupa que se expande a la derecha*/
 .search-container:hover .search-input,
 .search-input:focus {
   width: 160px;
   opacity: 1;
-  margin-left: 8px; /* gap between icon and input */
+  margin-left: 8px; /* espacio entre el icono de la lupa y la barra de busqueda */
 }
 
 
 
 
-/* First Section (Hero) */
+/* Primera seccion (Hero) */
 .hero {
   position: relative;
-  height: 90vh; /*Full screen height*/
+  height: 90vh; /*Pantalla completa*/
   background: url('../image/Fondo_3.jpg') no-repeat center center/cover;
   display: flex;
   align-items: center;
@@ -143,13 +143,13 @@ body {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.7); /* Overlay with opacity */
+  background: rgba(0, 0, 0, 0.7); /* Filtro del fondo negro con opacidad */
   z-index: 1;
 }
 
 .hero .overlay {
   position: relative;
-  z-index: 2; /* Ensures text is above the overlay */
+  z-index: 2; /* Para que el texto se ponga encima del filtro negro con opacidad */
   padding: 20px;
 }
 
@@ -158,16 +158,16 @@ body {
 
 
 
-/* Carousel */
+/* Carrusel */
 .carousel-section {
   width: 100%;
   position: relative;
-  background: #f8fafc; /* subtle bg for transparent images */
+  background: #f8fafc; /* Fondo transparente para los productos */
 }
 
 .carousel-container {
   position: relative;
-  width: 100%;       /* full width */
+  width: 100%;       /* Anchura maxima */
   overflow: hidden;
 }
 
@@ -183,13 +183,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white; /* solid bg behind transparent parts */
-  padding: 2rem 0;   /* spacing top/bottom */
+  background: white; /* Fondo del producto */
+  padding: 2rem 0;   /* espaciado de arriba / abajo*/
 }
 
 .carousel-item img {
-  max-width: 100%;    /* keeps wide look */
-  max-height: 450px; /* not too tall */
+  max-width: 100%;    /* Mantiene la vista ancho */
+  max-height: 450px; /* no muy alto */
   object-fit: contain;
   display: block;
   transition: transform 0.2s ease;
@@ -222,10 +222,10 @@ body {
   background: #4CAF50;
 }
 
-/* Mobile tweaks */
+/* Ajuste para mobiles */
 @media (max-width: 768px) {
   .carousel-item img {
-    max-height: 200px; /* shrink on small screens */
+    max-height: 200px; /* Hacerlo mas pequeño para pantallas de mobiles */
   }
 }
 
@@ -278,7 +278,7 @@ body {
 
 
 
-/* Catalog */
+/* Catalogo */
 .catalog {
   padding: 3rem 2rem;
   text-align: center;
@@ -308,12 +308,12 @@ body {
 
 .hero-buttons {
   margin-top: 20px;
-  text-align: center; /* centers the button */
+  text-align: center; /* Centrar el boton */
 }
 
 
 
-/*FUll CATALOG BUTTON LINK*/
+/*Boton para el catalogo completo*/
 .hero-buttons .primary {
   margin-top: 30px;
   background-color: #333333;
@@ -343,7 +343,7 @@ body {
 
 
 
-/*Product cards*/
+/*Cartas de productos*/
 .product-card {
 background: white;
   border: 1px solid #e5e7eb;
@@ -351,21 +351,21 @@ background: white;
   border-radius: 6px;
   text-align: left;
   box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-  position: relative; /* allows absolute positioning inside */
+  position: relative; /* Permite posicionamiento absoluto adentro */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* main content at top */
-  padding-bottom: 50px; /* leave space for the button */
+  justify-content: flex-start; /* Contenido principal */
+  padding-bottom: 50px; /* Espaciado para el boton */
 }
 
 
-/*Add to Cart button*/
+/*Boton de agregar al carrito*/
 .add-to-cart {
   position: absolute;
-  bottom: 10px;   /* distance from bottom */
-  left: 50%;      /* horizontal center */
+  bottom: 10px;   /* distancia del bottom */
+  left: 50%;      /* centro horizontal */
   transform: translateX(-50%);
-  width: 80%;      /* optional: make button wider */
+  width: 80%;      /* opcional: Hacer el boton mas ancho*/
   text-align: center;
 }
 
@@ -420,7 +420,7 @@ background: white;
 }
 
 
-/* Floating Cart Button */
+/* Boton del carrito */
 .cart-button {
   position: fixed;
   bottom: 20px;
@@ -447,14 +447,14 @@ background: white;
 
 .cart-button img {
   margin-left: -2px;
-  width: 28px;   /* adjust size of the icon */
+  width: 28px;   /* Ajustar tamaño del carrito */
   height: 28px;
 }
 
 
 
 
-/* Cart Badge */
+/* Cantidad de productos en el icono del carrito */
 .cart-badge {
   position: absolute;
   top: 8px;
@@ -481,10 +481,10 @@ background: white;
 }
 
 
-/* Cart Popup */
+/* Insignia de carrito */
 .cart-popup {
   position: fixed;
-  bottom: 90px; /* above the button */
+  bottom: 90px; /* Arriba del boton */
   right: 90px;
   width: 400px;
   max-height: 400px;
@@ -506,7 +506,7 @@ background: white;
 
 
 
-/*Cotizar button*/
+/*Boton de cotizacion*/
 .cotizar-btn {
   background-color: #4CAF50;
   color: white;
@@ -532,7 +532,7 @@ background: white;
 
 
 
-/* Cart Header */
+/* Encabezado del carrito */
 .cart-header {
   background: #f5f5f5;
   padding: 10px;
@@ -551,7 +551,7 @@ background: white;
 
 
 
-/* Cart Items */
+/* Inventario del carrito */
 .cart-items {
   padding: 15px;
   flex: 1;
@@ -618,14 +618,6 @@ background: white;
   transform: scale(1.09);
 }
 
-.remove-item .remove-label {
-  font-size: 0.75rem;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 3px;
-  line-height: 1.2;
-  pointer-events: none;
-}
 
 @keyframes icon-shake {
 0% { transform: rotate(0deg); }
@@ -644,7 +636,7 @@ background: white;
 
 
 
-/* Cart Footer */
+/* Pie de pagina del carrito */
 .cart-footer {
   padding: 10px;
   border-top: 1px solid #ddd;
@@ -652,7 +644,7 @@ background: white;
 }
 
 
-/* Cart Notification */
+/* Notificacion del carrito */
 #cart-notification {
   position: fixed;
   top: 20px;
@@ -668,18 +660,18 @@ background: white;
   pointer-events: none;
   transition: opacity 0.4s ease-in-out;
   z-index: 2000;
-  max-width: 90%;      /*shrink on small screens*/
-  text-align: center;  /*center text*/
-  word-wrap: break-word; /*allow wrapping*/
+  max-width: 90%;      /*Adaptar el tamaño a pantallas mas pequeñas*/
+  text-align: center;  /*centrar texto*/
+  word-wrap: break-word; /*Ajuste de texto*/
 }
 
-/* Visible state */
+/* Estado visible */
 #cart-notification.show {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Quantity Controls */
+/* Control de la cantidad de productos */
 .qty-controls {
   display: flex;
   align-items: center;
@@ -727,7 +719,7 @@ background: white;
 
 
 
-/*Catalog filter buttons*/
+/*Boton del filtro del catalogo*/
 .catalog-filters {
   margin-bottom: 2rem;
 }
@@ -748,9 +740,18 @@ background: white;
   border-color: #4CAF50;
 }
 
+/*Marcar texto filtrado por busqueda*/
+mark {
+  background-color: #2196f3;
+  color: white;
+  padding: 0 3px;
+  border-radius: 4px;
+  font-weight: bold;
+}
 
 
-/* footer */
+
+/* pie de pagina */
 .footer {
   background-color: #333333;
   color: white;
@@ -761,7 +762,7 @@ background: white;
 
 
 
-/* responsive adjustments */
+/* Ajustes responsivos */
 .menu-toggle {
   display: none;
   font-size: 28px;
@@ -772,16 +773,16 @@ background: white;
 
 @media (max-width: 768px) {
   .menu-toggle {
-    display: block; /* show hamburger */
+    display: block; /* mostrar menu de hamburguesa */
   }
 
   .nav-links {
     display: none; 
     flex-direction: column;
-    gap: 0.8rem; /* tighter spacing */
+    gap: 0.8rem; /* espaciado compacto  comprimir opciones de navbar*/
     background: #fff;
     position: absolute;
-    top: 70px; /* below navbar */
+    top: 70px; /* abajo del navbar */
     right: 20px;
     padding: 1rem;
     border: 1px solid #e5e7eb;
@@ -791,12 +792,11 @@ background: white;
   }
 
   .nav-links.active {
-    display: flex; /* shown when toggled */
+    display: flex; /* enseñar cuando se active (barrita verde que sale cuando pones el cursor encima de una de la funciones del navbar)*/
   }
 
   .nav-links a {
-    font-size: 15px; /* shrink font size */
+    font-size: 15px; /* Hacer mas pequeño el tamaño de la tipografia */
     padding: 6px 10px;
   }
 }
-
