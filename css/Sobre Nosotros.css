@@ -1,4 +1,4 @@
-/* Reset Base */
+/* Resetear base de la pagina */
 * {
   margin: 0;
   padding: 0;
@@ -22,12 +22,12 @@ body {
 
 
 
-/* Navigation bar */
+/* Navegacion del navbar */
 .navbar {
   background-color: #ffffff;
   padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between; /* space between left, center, right */
+  justify-content: space-between; /* espaciado entre izquierda, centro y derecha */
   align-items: center;
   position: sticky;
   top: 0;
@@ -36,7 +36,7 @@ body {
 }
 
 .logo {
-  flex: 1; /* left area */
+  flex: 1; /* area izquierda */
 }
 
 .logo img {
@@ -45,9 +45,9 @@ body {
 }
 
 .nav-links {
-  flex: 2; /* center area */
+  flex: 2; /* centro del area */
   display: flex;
-  justify-content: center; /* center links horizontally */
+  justify-content: center; /* enlaces horizontalmente centrales */
   gap: 2rem;
 }
 
@@ -76,18 +76,16 @@ body {
 }
 
 
-
-
-/* Search Container */
+/* Contenedor de busqueda */
 .search-container {
-  flex: 1; /* right area */
+  flex: 1; /* area derecha */
   display: flex;
   justify-content: flex-end;
   align-items: center;
   position: relative;
 }
 
-/* Search button */
+/* boton de busqueda*/
 .search-btn {
   background: none;
   border: none;
@@ -100,7 +98,7 @@ body {
   height: 22px;
 }
 
-/* Search input (hidden by default) */
+/* Barra de busqueda de la lupa que se esconde al inicio (hidden by default) */
 .search-input {
   width: 0;
   opacity: 0;
@@ -113,15 +111,16 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-/* Expand input to the RIGHT of icon */
+/* Barra de busqueda de la lupa que se expande a la derecha*/
 .search-container:hover .search-input,
 .search-input:focus {
   width: 160px;
   opacity: 1;
-  margin-left: 8px; /* gap between icon and input */
+  margin-left: 8px; /* espacio entre el icono de la lupa y la barra de busqueda */
 }
 
-/*ABOUT US*/
+
+/*Sobre Nosotros*/
 .about-section {
       background-color: #f5f5f5;
       padding: 60px 20px;
@@ -166,11 +165,11 @@ body {
     }
 
     main {
-  flex: 1; /* main content expands and pushes footer down */
+  flex: 1; /* el contenido principal se expande y empuja el pie de pagina al final de la pagina */
 
 }
 
-/* Floating Cart Button */
+/* boton de carrito flotante */
 .cart-button {
   position: fixed;
   bottom: 20px;
@@ -197,14 +196,14 @@ body {
 
 .cart-button img {
   margin-left: -2px;
-  width: 28px;   /* adjust size of the icon */
+  width: 28px;   /* ajustar tamaño del icono */
   height: 28px;
 }
 
 
 
 
-/* Cart Badge */
+/* insignia del carrito */
 .cart-badge {
   position: absolute;
   top: 8px;
@@ -215,7 +214,7 @@ body {
   font-weight: bold;
   padding: 2px 6px;
   border-radius: 50%;
-  display: none; /* hides if cart is empty */
+  display: none; /* se oculta si los carritos estan vacios */
 }
 
 
@@ -231,10 +230,10 @@ body {
 }
 
 
-/* Cart Popup */
+/* ventana del carrito */
 .cart-popup {
   position: fixed;
-  bottom: 90px; /* above the button */
+  bottom: 90px; /* arriba del boton */
   right: 90px;
   width: 400px;
   max-height: 400px;
@@ -256,7 +255,7 @@ body {
 
 
 
-/*Cotizar button*/
+/*Cotizar boton */
 .cotizar-btn {
   background-color: #4CAF50;
   color: white;
@@ -282,7 +281,7 @@ body {
 
 
 
-/* Cart Header */
+/* encabezado del carrito */
 .cart-header {
   background: #f5f5f5;
   padding: 10px;
@@ -301,7 +300,7 @@ body {
 
 
 
-/* Cart Items */
+/* articulos del carrito */
 .cart-items {
   padding: 15px;
   flex: 1;
@@ -367,14 +366,7 @@ body {
   transform: scale(1.09);
 }
 
-.remove-item .remove-label {
-  font-size: 0.75rem;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 3px;
-  line-height: 1.2;
-  pointer-events: none;
-}
+
 
 @keyframes icon-shake {
 0% { transform: rotate(0deg); }
@@ -393,7 +385,8 @@ body {
 
 
 
-/* Cart Footer */
+
+/* pie de pagina del carrito */
 .cart-footer {
   padding: 10px;
   border-top: 1px solid #ddd;
@@ -401,7 +394,7 @@ body {
 }
 
 
-/* Cart Notification */
+/* notificacion del carrito */
 #cart-notification {
   position: fixed;
   top: 20px;
@@ -417,18 +410,18 @@ body {
   pointer-events: none;
   transition: opacity 0.4s ease-in-out;
   z-index: 2000;
-  max-width: 90%;      /*shrink on small screens*/
-  text-align: center;  /*center text*/
-  word-wrap: break-word; /*allow wrapping*/
+  max-width: 90%;      /*encoger tamaño*/
+  text-align: center;  /*centrar texto*/
+  word-wrap: break-word; /*envolver*/
 }
 
-/* Visible state */
+/* estado visible */
 #cart-notification.show {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Quantity Controls */
+/* cantidad de controles */
 .qty-controls {
   display: flex;
   align-items: center;
@@ -477,7 +470,7 @@ body {
 
 
 
-/* footer */
+/* pie de pagina */
 .footer {
   background-color: #333333;
   color: white;
@@ -488,7 +481,7 @@ body {
 
 
 
-/* responsive adjustments */
+/* ajustes responsivos */
 .menu-toggle {
   display: none;
   font-size: 28px;
@@ -499,16 +492,16 @@ body {
 
 @media (max-width: 768px) {
   .menu-toggle {
-    display: block; /* show hamburger */
+    display: block; /* mostrar menu hamburguesa */
   }
 
   .nav-links {
     display: none; 
     flex-direction: column;
-    gap: 0.8rem; /* tighter spacing */
+    gap: 0.8rem; /* espacio mas estrecho */
     background: #fff;
     position: absolute;
-    top: 70px; /* below navbar */
+    top: 70px; /* debajo de la barra de navegacion  */
     right: 20px;
     padding: 1rem;
     border: 1px solid #e5e7eb;
@@ -518,12 +511,11 @@ body {
   }
 
   .nav-links.active {
-    display: flex; /* shown when toggled */
+    display: flex; /* visible cuando se activa */
   }
 
   .nav-links a {
-    font-size: 15px; /* shrink font size */
+    font-size: 15px; /* hacer pequeño la tipografia */
     padding: 6px 10px;
   }
 }
-
