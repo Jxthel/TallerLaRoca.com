@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Limpiar el carrito al recargar la página
-  localStorage.removeItem("cart");
+  //Guardar productos dentro del carrito//
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
 
   const addToCartButtons = document.querySelectorAll(".add-to-cart");
   const cartItemsContainer = document.querySelector(".cart-items");
@@ -238,4 +239,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render inicial
   renderizarCarrito();
 });
+
 
