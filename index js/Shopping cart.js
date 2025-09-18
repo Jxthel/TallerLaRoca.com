@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartTotalElement = document.querySelector(".cart-total");
   const cotizarBtn = document.getElementById("cotizarBtn");
   
-  let cart = []; // iniciar el carrito vacío
 
   function parseCurrency(texto) {
     if (typeof texto === "number") return texto;
@@ -239,5 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render inicial
   renderizarCarrito();
 });
+
 
 
