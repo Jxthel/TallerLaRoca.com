@@ -3,13 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 
-
   const addToCartButtons = document.querySelectorAll(".add-to-cart");
   const cartItemsContainer = document.querySelector(".cart-items");
   const cartTotalElement = document.querySelector(".cart-total");
   const cotizarBtn = document.getElementById("cotizarBtn");
   
-  let cart = []; // iniciar el carrito vacío
 
   function parseCurrency(texto) {
     if (typeof texto === "number") return texto;
@@ -240,5 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render inicial
   renderizarCarrito();
 });
+
 
 
