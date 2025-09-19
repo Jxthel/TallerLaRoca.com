@@ -484,17 +484,6 @@ background: white;
 
 
 /* Cart Popup */
-
-@media (max-width: 768px) {
-  .cart-popup {
-    right: 50%;
-    transform: translateX(50%); /* shift back into view */
-    width: 90%;                /* shrink to fit */
-    max-width: 350px;
-    bottom: 80px;              /* adjust spacing above cart button */
-  }
-}
-
  .cart-popup {
     position: fixed;
     bottom: 90px;
@@ -874,6 +863,7 @@ background: white;
     padding: 6px 10px;
   }
 }
+
 
 
 
