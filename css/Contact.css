@@ -545,3 +545,76 @@ body {
   }
 }
 
+/* ========Ajustes responsivos para moviles======== */
+@media (max-width: 480px) {
+  /* Navbar */
+  .search-container:hover .search-input,
+  .search-input:focus {
+    width: 120px; /* menos ancho */
+  }
+
+  .nav-links {
+    right: 10px; 
+    padding: 0.8rem;
+  }
+
+  /* Contenido de contacto */
+  .contact-left, .contact-right {
+    min-width: 100%;
+  }
+
+  .contact-section {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  /* Info cards */
+  .info-cards {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Mapa */
+  #map {
+    height: 300px; /* menor altura en móviles */
+  }
+
+  /* Carrito flotante */
+  .cart-popup {
+    right: 50%;
+    transform: translateX(50%);
+    width: 95%;
+    max-width: 300px;
+    bottom: 70px;
+  }
+
+  .cart-button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cart-button img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Formularios */
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .contact-left h2 {
+    font-size: 22px;
+  }
+
+  /* Footer */
+  .footer {
+    font-size: 14px;
+    padding: 0.8rem;
+  }
+}
+
+
