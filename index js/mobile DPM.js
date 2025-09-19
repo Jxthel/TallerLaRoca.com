@@ -5,4 +5,3 @@ const enlacesNav = document.querySelector(".nav-links");
 toggleMenu.addEventListener("click", () => {
 enlacesNav.classList.toggle("active");
 });
-
