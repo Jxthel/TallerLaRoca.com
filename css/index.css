@@ -484,6 +484,17 @@ background: white;
 
 
 /* Cart Popup */
+
+@media (max-width: 768px) {
+  .cart-popup {
+    right: 50%;
+    transform: translateX(50%); /* shift back into view */
+    width: 90%;                /* shrink to fit */
+    max-width: 350px;
+    bottom: 80px;              /* adjust spacing above cart button */
+  }
+}
+
  .cart-popup {
     position: fixed;
     bottom: 90px;
@@ -499,15 +510,6 @@ background: white;
     z-index: 1002;
     overflow: hidden;
   }
-
-  @media (max-width: 768px) {
-  .cart-popup {
-    right: 10px;
-    width: 90%;
-    max-width: 350px;
-    bottom: 80px;
-  }
-}
 
 .wa-icon {
   width: 32px;
@@ -872,6 +874,7 @@ background: white;
     padding: 6px 10px;
   }
 }
+
 
 
 
