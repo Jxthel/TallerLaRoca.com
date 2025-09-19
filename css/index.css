@@ -484,21 +484,13 @@ background: white;
 
 
 /* Cart Popup */
-.cart-popup {
-  position: fixed;
-  bottom: 90px; /* above the button */
-  right: 90px;
-  width: 400px;
-  max-height: 400px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-  display: none;
-  flex-direction: column;
-  z-index: 1002;
-  overflow: hidden;
-}
+ @media (max-width: 768px) {
+  .cart-popup {
+    right: 10px;      /*Hug right side edge*/
+    width: 90%;       /*Covers most of the screen*/
+    max-width: 350px;
+    bottom: 80px;
+  }
 
 .wa-icon {
   width: 32px;
@@ -863,4 +855,5 @@ background: white;
     padding: 6px 10px;
   }
 }
+
 
