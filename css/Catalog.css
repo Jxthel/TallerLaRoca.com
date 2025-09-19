@@ -800,3 +800,14 @@ mark {
     padding: 6px 10px;
   }
 }
+
+@media (max-width: 768px) {
+  .cart-popup {
+    right: 50%;                 
+    transform: translateX(50%); 
+    width: 90%;                 
+    max-width: 350px;           
+    bottom: 80px;               
+  }
+}
+
